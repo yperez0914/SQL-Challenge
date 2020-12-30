@@ -106,3 +106,45 @@ REFERENCES "titles" ("title_id");
 
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
+
+
+SELECT employees.emp_no, employees.last_name, employees.first_name, employees.sex, salaries.salary
+FROM employees, salaries
+WHERE employees.emp_no = salaries.emp_no;
+
+SELECT employees.last_name, employees.first_name, employees.hire_date
+FROM employees
+WHERE extract (year from employees.hire_date) = 1986;
+
+SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_no, departments.dept_name
+FROM employees, departments, dept_manager
+WHERE employees.emp_no = dept_manager.emp_no AND departments.dept_no = dept_manager.dept_no;
+
+SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
+FROM employees, dept_emp, departments
+WHERE employees.emp_no = dept_emp.emp_no AND dept_emp.dept_no = departments.dept_no;
+
+SELECT employees.last_name, employees.first_name, employees.sex
+FROM employees
+WHERE employees.first_name IN ('Hercules') AND employees.last_name  LIKE 'B%';
+
+SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
+FROM employees, departments, dept_emp
+WHERE employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales';
+-- IN departments. dept_name 
+
+SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
+FROM employees, departments, dept_emp
+WHERE (employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales') 
+	OR (employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Development');
+
+-- SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
+-- FROM employees, departments, dept_emp
+-- WHERE (departments.dept_name = 'Sales') 
+-- 	OR (departments.dept_name = 'Development')
+
+SELECT employees.last_name, COUNT(employees.last_name) as freq_last_names
+FROM employees
+GROUP BY employees.last_name
+ORDER BY employees.last_name DESC;
+
