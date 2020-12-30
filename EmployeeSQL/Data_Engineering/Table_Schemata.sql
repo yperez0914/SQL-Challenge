@@ -1,10 +1,9 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
--- Link to schema: https://app.quickdatabasediagrams.com/#/d/Kc35HJ
--- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
-
--- Modify this code to update the DB schema diagram.
--- To reset the sample schema, replace everything with
--- two dots ('..' - without quotes).
+DROP TABLE dept_emp CASCADE;
+DROP TABLE departments CASCADE;
+DROP TABLE salaries CASCADE;
+DROP TABLE employees CASCADE;
+DROP TABLE dept_manager CASCADE;
+DROP TABLE titles CASCADE;
 
 CREATE TABLE "departments" (
     "dept_no" VARCHAR   NOT NULL,
@@ -31,7 +30,7 @@ CREATE TABLE "dept_manager" (
 );
 
 CREATE TABLE "employees" (
-    "emp_no" INT   NOT NULL,
+    "emp_no" INT NOT NULL,
     "emp_title_id" VARCHAR   NOT NULL,
     "birth_date" date   NOT NULL,
     "first_name" VARCHAR   NOT NULL,
@@ -59,6 +58,38 @@ CREATE TABLE "titles" (
      )
 );
 
+
+
+COPY departments
+FROM 'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\departments.csv'
+DELIMITER ',' CSV HEADER;
+SELECT * FROM departments;
+
+COPY dept_emp
+FROM 'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\dept_emp.csv'
+DELIMITER ',' CSV HEADER;
+SELECT * FROM dept_emp;
+
+COPY dept_manager
+FROM 'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\dept_manager.csv'
+DELIMITER ',' CSV HEADER;
+SELECT * FROM dept_manager;
+
+COPY employees
+FROM 'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\employees.csv'
+DELIMITER ',' CSV HEADER;
+SELECT * FROM employees;
+
+COPY salaries
+FROM 'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\salaries.csv'
+DELIMITER ',' CSV HEADER;
+SELECT * FROM salaries;
+
+COPY titles
+FROM 'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\titles.csv'
+DELIMITER ',' CSV HEADER;
+SELECT * FROM titles;
+
 ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
@@ -76,4 +107,3 @@ REFERENCES "titles" ("title_id");
 
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
-

@@ -4,6 +4,7 @@ DROP TABLE salaries CASCADE;
 DROP TABLE employees CASCADE;
 DROP TABLE dept_manager CASCADE;
 DROP TABLE titles CASCADE;
+
 CREATE TABLE "departments" (
     "dept_no" VARCHAR   NOT NULL,
     "dept_name" VARCHAR   NOT NULL,
@@ -130,23 +131,12 @@ WHERE employees.first_name IN ('Hercules') AND employees.last_name  LIKE 'B%';
 
 SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
 FROM employees, departments, dept_emp
-WHERE employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales';
--- IN departments. dept_name 
+WHERE employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales'; 
 
 SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
 FROM employees, departments, dept_emp
 WHERE (employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales') 
 	OR (employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Development');
-
--- SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
--- FROM employees, departments, dept_emp
--- WHERE (departments.dept_name = 'Sales') 
--- 	OR (departments.dept_name = 'Development')
-
-SELECT employees.last_name, COUNT(employees.last_name) as freq_last_names
-FROM employees
-GROUP BY employees.last_name
-ORDER BY employees.last_name DESC;
 
 SELECT employees.last_name, COUNT(employees.last_name) as freq_last_names
 FROM employees
