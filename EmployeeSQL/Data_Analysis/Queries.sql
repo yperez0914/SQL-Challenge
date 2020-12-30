@@ -148,3 +148,7 @@ FROM employees
 GROUP BY employees.last_name
 ORDER BY employees.last_name DESC;
 
+SELECT employees.last_name, COUNT(employees.last_name) as freq_last_names
+FROM employees
+GROUP BY employees.last_name
+ORDER BY freq_last_names DESC;
