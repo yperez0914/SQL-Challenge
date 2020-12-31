@@ -3,7 +3,7 @@ For this project, I used PostgreSQL and pgAdmin to manage a company's employee d
 <br>
 
 # Data Engineering
-Using the information provided from multiple CSV files, I created an EDR for the data. The following relationships were defined in the EDR:
+Using the information provided from multiple CSV files, I created an EDR for the data. The following relationships were defined in the EDR: <br>
 Table | Primary Key
 -------------------------
 employees | emp_no
