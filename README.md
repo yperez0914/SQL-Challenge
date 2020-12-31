@@ -5,17 +5,22 @@ For this project, I used PostgreSQL and pgAdmin to manage a company's employee d
 # Data Engineering
 Using the information provided from multiple CSV files, I created an EDR for the data. The following relationships were defined in the EDR:
 Table | Primary Key
+-------------------------
 employees | emp_no
 departments |dept_no
 titles | title_id
 salariesv| emp_no
 <br>
+
 Table | Composite Key
+---------------------------
 dept_emp | emp_no, dept_no
 dept_manager | emp_no, dept_no
 <br>
 These relationships and foreign keys can be seen in the code for the EDR & table schemas.
-[Table_Schemata full code]()
+<br>
+
+[Table_Schemata full code](https://github.com/yperez0914/SQL-Challenge/blob/main/EmployeeSQL/Data_Engineering/Table_Schemata.sql)
     Example:
     ```CREATE TABLE "dept_manager" (
             "emp_no" INT   NOT NULL,
@@ -56,12 +61,12 @@ Finally, I performed data analysis in the following ways:
 
 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 <br>
-[Queries full code]()
+
+[Queries full code](https://github.com/yperez0914/SQL-Challenge/blob/main/EmployeeSQL/Data_Analysis/Queries.sql)
     #3 Example:
-    ```
-    SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_no, depts.dept_name
-    FROM employees AS emp 
-    INNER JOIN dept_manager AS dept_m
-	    ON emp.emp_no = dept_m.emp_no 
-    INNER JOIN departments AS depts
-	    ON depts.dept_no = dept_m.dept_no;```
+    ```SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_no, depts.dept_name
+       FROM employees AS emp 
+       INNER JOIN dept_manager AS dept_m
+	        ON emp.emp_no = dept_m.emp_no 
+       INNER JOIN departments AS depts
+	        ON depts.dept_no = dept_m.dept_no;```
