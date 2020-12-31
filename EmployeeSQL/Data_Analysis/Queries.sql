@@ -108,36 +108,59 @@ REFERENCES "titles" ("title_id");
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
+-- List the following details of each employee: employee number, last name, first name, sex, and salary.
+SELECT emp.emp_no, emp.last_name, emp.first_name, emp.sex, sal.salary
+FROM employees AS emp 
+LEFT JOIN salaries AS sal
+	ON (emp.emp_no = sal.emp_no)
+ORDER BY emp.emp_no;
 
-SELECT employees.emp_no, employees.last_name, employees.first_name, employees.sex, salaries.salary
-FROM employees, salaries
-WHERE employees.emp_no = salaries.emp_no;
-
+-- List first name, last name, and hire date for employees who were hired in 1986.
 SELECT employees.last_name, employees.first_name, employees.hire_date
 FROM employees
 WHERE extract (year from employees.hire_date) = 1986;
 
-SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_no, departments.dept_name
-FROM employees, departments, dept_manager
-WHERE employees.emp_no = dept_manager.emp_no AND departments.dept_no = dept_manager.dept_no;
+-- List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name.
+SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_no, depts.dept_name
+FROM employees AS emp 
+INNER JOIN dept_manager AS dept_m
+	ON emp.emp_no = dept_m.emp_no 
+INNER JOIN departments AS depts
+	ON depts.dept_no = dept_m.dept_no;
 
-SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
-FROM employees, dept_emp, departments
-WHERE employees.emp_no = dept_emp.emp_no AND dept_emp.dept_no = departments.dept_no;
+--List the department of each employee with the following information: employee number, last name, first name, and department name.
+SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_name
+FROM employees AS emp
+INNER JOIN dept_emp AS dept_e
+	ON emp.emp_no = dept_e.emp_no
+INNER JOIN departments AS depts
+	ON dept_e.dept_no = depts.dept_no;
 
+--List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B.
 SELECT employees.last_name, employees.first_name, employees.sex
 FROM employees
 WHERE employees.first_name IN ('Hercules') AND employees.last_name  LIKE 'B%';
 
-SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
-FROM employees, departments, dept_emp
-WHERE employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales'; 
-
-SELECT employees.last_name, employees.first_name, employees.emp_no, departments.dept_name
-FROM employees, departments, dept_emp
-WHERE (employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Sales') 
-	OR (employees.emp_no = dept_emp.emp_no AND dept_emp. dept_no = departments.dept_no AND departments.dept_name = 'Development');
-
+--List all employees in the Sales department, including their employee number, last name, first name, and department name.
+SELECT emp.last_name, emp. first_name, emp.emp_no, depts.dept_name
+FROM employees AS emp
+INNER JOIN dept_emp AS dept_e
+	ON emp.emp_no = dept_e.emp_no
+INNER JOIN departments AS depts
+	ON dept_e.dept_no = depts.dept_no
+	WHERE depts.dept_name = 'Sales';
+	
+--List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+SELECT emp.last_name, emp. first_name, emp.emp_no, depts.dept_name
+FROM employees AS emp
+INNER JOIN dept_emp AS dept_e
+	ON emp.emp_no = dept_e.emp_no
+INNER JOIN departments AS depts
+	ON dept_e.dept_no = depts.dept_no
+	WHERE depts.dept_name = 'Sales'
+		OR depts.dept_name = 'Development';
+		
+--In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 SELECT employees.last_name, COUNT(employees.last_name) as freq_last_names
 FROM employees
 GROUP BY employees.last_name
