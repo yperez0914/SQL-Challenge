@@ -1,4 +1,5 @@
 # SQL-Challenge
+<br>
 For this project, I used PostgreSQL and pgAdmin to manage a company's employee data.
 <br>
 
@@ -52,6 +53,7 @@ SELECT * FROM dept_manager;
 <br>
 
 # Data Analysis
+<br>
 Finally, I performed data analysis in the following ways:
 <br>
 
