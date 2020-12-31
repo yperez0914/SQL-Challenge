@@ -5,7 +5,9 @@ For this project, I used PostgreSQL and pgAdmin to manage a company's employee d
 
 # Data Engineering 
 <br>
-Using the information provided from multiple CSV files, I created an EDR for the data. The following relationships were defined in the EDR: <br>
+Using the information provided from multiple CSV files, I created an EDR for the data. The following relationships were defined in the EDR: 
+<br>
+
 Table | Primary Key
 ------| -----------------
 employees | emp_no
@@ -24,7 +26,9 @@ These relationships and foreign keys can be seen in the code for the EDR & table
 
 [Table_Schemata full code](https://github.com/yperez0914/SQL-Challenge/blob/main/EmployeeSQL/Data_Engineering/Table_Schemata.sql)
 <br>
-Example: <br>
+
+## Example: 
+
 ```
 CREATE TABLE "dept_manager" (
     "emp_no" INT   NOT NULL,
@@ -36,14 +40,16 @@ CREATE TABLE "dept_manager" (
 ```
 
 <br>
+
 ```
-ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")<br>
-REFERENCES "employees" ("emp_no");
+ ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")<br>
+ REFERENCES "employees" ("emp_no");
 ```
 <br>
 Then, I imported the tables from the CSV files to create a SQL table schema for each of the CSV files.
 <br>
-Example:<br>
+
+## Example:
  ```
 COPY dept_manager 
 FROM'absolutepath.csv'
@@ -76,7 +82,9 @@ Finally, I performed data analysis in the following ways:
 
 [Queries full code](https://github.com/yperez0914/SQL-Challenge/blob/main/EmployeeSQL/Data_Analysis/Queries.sql)
 <br>
-#3 Example: <br>
+
+## Department Manager Example: 
+
 ```
 SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_no, depts.dept_name 
 FROM employees AS emp 
