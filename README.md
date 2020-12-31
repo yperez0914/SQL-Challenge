@@ -21,24 +21,27 @@ These relationships and foreign keys can be seen in the code for the EDR & table
 <br>
 
 [Table_Schemata full code](https://github.com/yperez0914/SQL-Challenge/blob/main/EmployeeSQL/Data_Engineering/Table_Schemata.sql)
-    Example:
-    ```CREATE TABLE "dept_manager" (
-            "emp_no" INT   NOT NULL,
-            "dept_no" VARCHAR   NOT NULL,
-            CONSTRAINT "pk_dept_manager" PRIMARY KEY (
-            "emp_no","dept_no"
-            )
-        );
-       ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")
-       REFERENCES "employees" ("emp_no");```
+<br>
+Example:
+```CREATE TABLE "dept_manager" (
+
+>"emp_no" INT   NOT NULL,<br>
+>"dept_no" VARCHAR   NOT NULL,<br>
+>CONSTRAINT "pk_dept_manager" PRIMARY KEY (<br>
+>>"emp_no","dept_no"<br>
+>)<br>
+);```
+<br>
+```ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")<br>
+REFERENCES "employees" ("emp_no");```
 <br>
 Then, I imported the tables from the CSV files to create a SQL table schema for each of the CSV files.
-    Example:
-    ```COPY dept_manager
-       FROM
-       'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\dept_manager.csv'
-       DELIMITER ',' CSV HEADER;
-       SELECT * FROM dept_manager;```
+<br>
+Example:
+ ```COPY dept_manager <br>
+FROM'C:\Users\yenia\Desktop\JHU_Bootcamp\Homework\SQL-Challenge\EmployeeSQL\Data\dept_manager.csv'<br>
+DELIMITER ',' CSV HEADER; <br>
+SELECT * FROM dept_manager;``` 
 <br>
 
 # Data Analysis
@@ -63,10 +66,13 @@ Finally, I performed data analysis in the following ways:
 <br>
 
 [Queries full code](https://github.com/yperez0914/SQL-Challenge/blob/main/EmployeeSQL/Data_Analysis/Queries.sql)
-    #3 Example:
-    ```SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_no, depts.dept_name
-       FROM employees AS emp 
-       INNER JOIN dept_manager AS dept_m
-	        ON emp.emp_no = dept_m.emp_no 
-       INNER JOIN departments AS depts
-	        ON depts.dept_no = dept_m.dept_no;```
+<br>
+#3 Example:
+```SELECT emp.last_name, emp.first_name, emp.emp_no, depts.dept_no, depts.dept_name <br>
+FROM employees AS emp <br>
+INNER JOIN dept_manager AS dept_m <br>
+
+> ON emp.emp_no = dept_m.emp_no <br>
+INNER JOIN departments AS depts<br>
+
+> ON depts.dept_no = dept_m.dept_no;```
