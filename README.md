@@ -13,7 +13,7 @@ Table | Primary Key
 employees | emp_no
 departments |dept_no
 titles | title_id
-salariesv| emp_no
+salaries | emp_no
 <br>
 
 Table | Composite Key
